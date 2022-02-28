@@ -1,3 +1,9 @@
+import kotlin.math.PI
+import kotlin.math.pow
+import kotlin.math.sqrt
+import kotlin.random.Random
+import kotlin.random.nextInt
+
 /*
  * Copyright (c) 2021 Razeware LLC
  * 
@@ -28,6 +34,125 @@
  * THE SOFTWARE.
  */
 
-fun main() {
+const val myAge = 32
 
+fun main() {
+    println(2 + 6)
+    println(10 - 2)
+    println(4 * 2)
+    println(16 / 2)
+
+    println(28 % 10)
+    println(28.0 % 10.0)
+    println("%.0f".format(28.0 % 10.0))
+
+    println(1 shl 3)
+    println(32 shr 2)
+
+
+    var averageAge: Double = myAge.toDouble()
+    averageAge = 30.0
+
+    println(averageAge)
+
+    val testNumber = 1
+    val evenOdd = testNumber % 2
+
+    println(evenOdd)
+
+    var answer = 0
+    answer += 1
+    answer += 10
+    answer *= 10
+    answer shr 3
+    println(answer)
+
+
+    // Ex 1
+    val exercises = 9
+    var exercisesSolved = 0
+
+    exercisesSolved += 1
+
+    // Ex 2
+    var age = 16
+    println(age)
+    age = 30
+    println(age)
+
+    exercisesSolved += 1
+
+    // Ex 3
+    val a : Int = 46
+    val b : Int = 10
+
+    val answer1: Int = (a * 100) + b
+    println(answer1)
+
+    val answer2: Int = (a * 100) + (b * 100)
+    println(answer2)
+
+    val answer3: Int = (a * 100) + (b / 10)
+    println(answer3)
+
+    exercisesSolved += 1
+
+    // Ex 4
+    val exercise6 = (5*3)-(4/(2*2))
+    println(exercise6)
+
+    exercisesSolved += 1
+
+    // Ex 5
+    val amount1 : Double = 10.0
+    val amount2 : Double = 3.0
+    val average = (amount1 + amount2) / 2
+    println(average)
+
+    exercisesSolved += 1
+
+    // Ex 6
+    val fahrenheit = 100
+
+    val celcius =(fahrenheit -32 ) / 1.8
+
+    println(celcius)
+    exercisesSolved += 1
+
+    // Ex 7
+    val position = Random.nextInt(64)
+    println(position)
+    val row = (position / 8 ) + 1
+    println(row - 1)
+    val column = 8 - (row*8) % position
+    println(column)
+
+    exercisesSolved += 1
+
+    // Ex 8
+    val degrees : Double = 30.0
+    val radians = degrees * (PI / 180)
+    println(radians)
+
+    exercisesSolved += 1
+
+    // Ex 9
+    val x1 = 5.0
+    val y1 = 2.0
+
+    val x2 = 15.0
+    val y2 = 5.0
+
+    val distance : Double =   sqrt((x2 - x1).pow(2) +(y2 - y1).pow(2))
+
+    println(distance)
+
+    val slope : Double =   (x2 - x1) / (y2 - y1)
+
+    println(slope)
+
+    exercisesSolved += 1
+    println(exercisesSolved)
+
+    println("Challenge completed!")
 }
