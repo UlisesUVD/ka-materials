@@ -185,5 +185,5 @@ fun main() {
         println("$counter Rolls, Roll is $roll")
     } while (roll != 0)
 
-    // Challenges
+
 }
