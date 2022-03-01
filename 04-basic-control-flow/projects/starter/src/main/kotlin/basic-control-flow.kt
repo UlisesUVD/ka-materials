@@ -1,3 +1,5 @@
+import kotlin.random.Random
+
 /*
  * Copyright (c) 2021 Razeware LLC
  * 
@@ -30,4 +32,158 @@
 
 fun main() {
 
+    val yes: Boolean = true
+    val no: Boolean = false
+
+    // inferred
+    val y = true
+    val n = false
+
+
+    val doesOneEqualTwo = (1 == 2)
+
+    val doesOneNotEqualTwo = (1 != 2)
+
+    val alsoTrue = !(1==2)
+
+    val isOneGreaterThanTwo = (1 > 2)
+    val isOneLessThanTwo = (1 < 2)
+
+
+    val and = true && true
+    val or = true || false
+
+
+    // String equiality
+    // in kotlin you can use the equality operator for strings while in java is recommended to use .equals()
+
+    val guess = "dog"
+    val dogEqualsCat = guess == "cat"
+
+    // also works for lexicographical comparisons
+
+    val order = "cat" < "dog"
+    println(order)
+
+
+    // Mini Exercises
+
+    // Ex 1
+    val myAge = 32
+    val isTeenager = (myAge > 13) && (myAge < 19)
+    println(isTeenager)
+
+    // Ex 2
+    val theirAge = 30
+    val bothTeenagers = ((theirAge > 13) && (theirAge < 19)) && isTeenager
+    println(bothTeenagers)
+
+    // Ex 3
+    val reader = "Ulises Uriel Verduzco Díaz"
+    val author = "Richard Lucas"
+
+    val authorIsReader = reader == author
+    println(authorIsReader)
+
+    // Ex 4
+    val readerBeforeAuthor = reader < author
+    println(readerBeforeAuthor)
+
+    //The IF expression
+    if(2>1){
+        println("Yes, 2 is greater that 1")
+    }
+
+    val animal = "Fox"
+    if(animal == "Cat" || animal == "Dog"){
+        println("Animal is a house pet")
+    } else{
+        println("Animal is not a house pet")
+    }
+
+    val a = 5
+    val b = 10
+
+    val min = if(a < b) a else b
+    val max = if(a > b) a else b
+
+    // Short circuiting
+
+    val name = "test"
+    if ( 1 > 2 && name == "Matt Galloway" ){
+
+        // the first expression "1>2" is false, so it won't evaluate to true for && operator
+        // no matter if the second expression could be true
+    }
+
+    if( 1 < 2 || name == "Matt Galloway"){
+
+        // the first expression is true, so it doesn't matter if the second expression is true or false
+        // because we are using an || operator
+    }
+
+    // Encapsulating variables
+
+    var hoursWorked = 45
+
+    var price = 0
+    if( hoursWorked > 40){
+        val hoursOver40 = hoursWorked - 40
+        price += hoursOver40 *50
+        hoursWorked -= hoursOver40
+    }
+
+    price += hoursWorked * 25
+    println(price)
+    // println(hoursOver40) // val not found
+
+    // Loops
+
+    // while loop
+    var sum = 1
+
+    while (sum < 1000){
+        println(sum)
+        sum = sum + (sum + 1)
+    }
+
+    // do-while loop
+    sum = 1
+    do{
+        println(sum)
+        sum = sum + (sum + 1)
+    } while(sum < 1000)
+
+    // breaking out of a loop
+
+    sum = 1
+    while(true){ // runs forever
+        println(sum)
+        sum = sum + (sum + 1)
+        if(sum >= 1000){
+            break // breaks out
+        }
+    }
+
+    // Mini Exercises
+
+    // Ex 1
+
+    var counter = 0
+    while(counter < 10){
+        println("counter is $counter")
+        counter += 1
+    }
+
+    // Ex 2
+    counter = 0
+    var roll = 0
+
+    do {
+        roll = Random.nextInt(6)
+        counter += 1
+        println("$counter Rolls, Roll is $roll")
+    } while (roll != 0)
+
+    // Challenges
 }
