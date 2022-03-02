@@ -1,3 +1,5 @@
+import kotlin.random.Random
+
 /*
  * Copyright (c) 2021 Razeware LLC
  * 
@@ -30,4 +32,150 @@
 
 fun main() {
 
+    // Ranges
+    val closedRange = 0..5
+
+    val halfOpenRange = 0 until 5
+
+    val decreasingRange = 5 downTo 0
+
+
+
+    // For loops
+
+    val count = 10
+
+    var sum = 0
+
+    for (i in 1 ..count){
+        sum += i
+        println("Start of iteration $i: i = $i, sum = $sum")
+    }
+
+    // Repeat, no loop constant
+
+    sum = 1
+    var lastSum = 0
+    repeat(10){
+        val temp = sum
+        sum += lastSum
+        lastSum = temp
+
+        println("lastSum: = $lastSum, sum = $sum")
+    }
+
+    // Step in loops
+    sum = 0
+    for (i in 1..count step 2){
+        sum += 1
+        println("Start of iteration $i: i = $i, sum = $sum")
+    }
+
+    sum = 0
+    for (i in count downTo  1 step 2){
+        sum += 1
+        println("Start of iteration $i: i = $i, sum = $sum")
+    }
+
+    // Continue
+    // skipping even rows from a matrix
+
+    sum = 0
+    for (row in 0 until 8){
+        if(row % 2 == 0){
+            continue
+        }
+        for (column in 0 until 8){
+            sum += row*column
+        }
+    }
+
+    println("sum of odd rows = $sum")
+
+    // sum all numbers with column <= row
+
+    sum = 0
+
+    rowLoop@ for(row in 0 until 8){
+        columnLoop@ for(column in 0 until  8){
+            if(column == row ){
+                continue@rowLoop
+            }
+            sum += row* column
+        }
+    }
+    println("sum of diagonal numbers = $sum")
+
+    // When
+
+    val number = Random.nextInt(10)
+
+    when(number){
+        0 -> println("is Zero!")
+        else -> println("is not Zero!")
+    }
+
+    // Works with more data types
+    val animal = listOf("Cat", "Dog", "Shark").random()
+
+    when(animal){
+        "Dog", "Cat" -> println("Animal is a house pet")
+        else -> println("Animal is not a house pet")
+    }
+
+    // return something
+
+    val numberName = when(number){
+        2 -> "Two"
+        4 -> "Four"
+        6 -> "Six"
+        8 -> "Eight"
+        10 -> "Ten"
+        else -> {
+            println("Number is not known")
+            "Unknown"
+        }
+    }
+
+    println(numberName)
+
+    // Complex choice
+    val hourOfTheDay = Random.nextInt(24)
+    var timeOfTheDay = ""
+
+    timeOfTheDay = when(hourOfTheDay){
+        0, 1, 2, 3, 4, 5 -> "Early morning"
+        6, 7, 8, 9, 10, 11 -> "Morning"
+        12, 13, 14, 15, 16 -> "Afternoon"
+        17, 18, 19 -> "Evening"
+        20, 21, 22, 23 -> "Night"
+        else -> {
+            "Unknown"
+        }
+    }
+
+    println("hour $hourOfTheDay is $timeOfTheDay")
+
+    // Ranges
+
+    timeOfTheDay = when(hourOfTheDay){
+        in 0 .. 5 -> "Early morning"
+        in 6 .. 11 -> "Morning"
+        in 12 .. 16 -> "Afternoon"
+        in 17 .. 19 -> "Evening"
+        in 20 .. 23 -> "Night"
+        else -> {
+            "Unknown"
+        }
+    }
+
+    println("hour $hourOfTheDay is $timeOfTheDay")
+
+
+    // Conditions
+
+    when {
+        number % 2 == 0 -> println("even")
+        else -> println("odd")
+    }
 }
