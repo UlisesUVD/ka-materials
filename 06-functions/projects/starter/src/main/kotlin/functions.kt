@@ -29,5 +29,122 @@
  */
 
 fun main() {
+    printMyName()
+    printMultipleOfFive(2)
+    printMultipleOf(10, 20)
 
+    // 3. Parameter named arguments
+    printMultipleOf(andValue = 10, multiplier = 50 )
+
+    // 4. Parameter Default values
+    printMultipleOfWithDefaults()
+    printMultipleOfWithDefaults(4)
+    printMultipleOfWithDefaults(andValue = 2)
+
+    // 5. Return values
+    val result = multiply(10, 20)
+    val results = multiplyAndDivide(4,2)
+    val inferredResult = multiplyInferred(4,2)
+
+    // 6. Parameters and values
+    incrementAndPrint(10)
+
+    // 7. Overloading
+    var incremented1 = getValue(10)
+    var incremented2 = getValue(10, 2)
+    println("increment $incremented1")
+    println("increment $incremented2")
+
+    // 8. Functions as variables
+    var function = ::add
+    function(4,2)
+    function = ::subtract
+    function(4,2)
+    function = ::add
+    printResult(function, 4, 2)
+}
+
+
+// 1. Function declaration
+fun printMyName(){
+    println("My name")
+}
+
+// 2. Function parameters
+fun printMultipleOfFive(value: Int){
+    println("$value * 5 = ${value*5}")
+}
+
+fun printMultipleOf(multiplier: Int, andValue: Int){
+    println("$multiplier * $andValue = ${multiplier*andValue}")
+}
+
+// 4. Parameter Default values
+fun printMultipleOfWithDefaults(multiplier: Int = 10, andValue: Int = 1){
+    println("$multiplier * $andValue = ${multiplier*andValue}")
+}
+
+// 5. Return values
+
+fun multiply(multiplier: Int, andValue: Int): Int{
+    return multiplier * andValue
+}
+
+fun multiplyAndDivide(number: Int, factor: Int): Pair<Int, Int>{
+    return Pair(number * factor, number / factor)
+}
+
+fun multiplyInferred(number: Int, factor: Int) : Int = number * factor
+
+// 6. Parameters as values
+fun incrementAndPrint(value: Int){
+    // value += 1 // parameters are constants, cannot be reassigned
+    var newValue = value
+    println(value)
+    println(newValue)
+}
+
+// 7. Overloading
+fun getValue(value: Int) : Int{
+    return value + 1
+}
+
+fun getValue(value: Int, increment: Int) : Int{
+    return value + increment
+}
+
+
+fun getValue(value: String) : String{
+    return value
+}
+
+// cannot overload, because it differs only in return type, not in parameters
+/*
+fun getValue(value: String) : Int{
+    return value.toInt()
+}
+*/
+
+// 8. Functions as variables
+fun add(a: Int, b: Int): Int {
+    return a+b
+}
+
+fun subtract(a: Int, b: Int): Int {
+    return a-b
+}
+
+// you can pass functions as parameters
+fun printResult( function: (Int, Int) -> Int, a: Int, b: Int){
+    val result = function(a,b)
+    println(result)
+}
+
+
+// 9. The land of no return
+fun infiniteLoop(): Nothing{
+    // never returns anything
+    while(true){
+        // runs forever
+    }
 }
