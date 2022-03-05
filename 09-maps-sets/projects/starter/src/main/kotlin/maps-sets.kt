@@ -30,4 +30,113 @@
 
 fun main() {
 
+
+    // 1. Creating Maps
+
+    var yearOfBirth = mapOf( //inmutable
+        "Anna" to 1990,
+        "Brian" to 1991,
+        "Craig" to 1992,
+        "Donna" to 1993
+     )
+
+    println(yearOfBirth)
+
+    var namesAndScores = mutableMapOf( //mutable
+        "Anna" to 2,
+        "Brian" to 2,
+        "Craig" to 8,
+        "Donna" to 6,
+    )
+
+    println(namesAndScores)
+
+    namesAndScores = mutableMapOf()
+
+    var pairs = HashMap<String, Int>()
+
+    pairs = HashMap<String, Int>(20)
+
+    // 2. Accessing values
+
+    // 3. Using the index operator
+
+    namesAndScores = mutableMapOf( //mutable
+        "Anna" to 2,
+        "Brian" to 2,
+        "Craig" to 8,
+        "Donna" to 6,
+    )
+    println(namesAndScores["Anna"])
+    println(namesAndScores["GReg"])
+
+    // 4. Using properties and methods
+
+    println(namesAndScores.get("Craig"))
+    println(namesAndScores.isEmpty())
+    println(namesAndScores.size)
+
+    // 5. Modifying mutable maps
+
+    // 6. Adding pairs
+
+    val bobData = mutableMapOf(
+        "name" to "Bob",
+        "profession" to "CardPlayer",
+        "country" to "USA"
+    )
+
+    bobData.put("state", "CA")
+    bobData["city"] = "San Francisco"
+
+    // 7. Removing data
+
+    val oldCity = bobData.remove("city") // delete and get old value
+
+    bobData.remove("state", "CA") // delete pair only if values match
+
+    for( (player, score) in namesAndScores){
+        println("$player - $score")
+    }
+
+    // 8. Running time for Map operations
+
+    // 9. Hashcodes
+
+    println("some string".hashCode())
+    println(1.hashCode())
+    println(false.hashCode())
+    println(true.hashCode())
+
+    // for performance hashmap should be used instead of map
+
+    // 10. Sets
+
+    // 11. creating sets
+
+    val names = setOf("Anna", "Brian", "Craig", "Anna")
+    println(names)
+
+    val hashSet = HashSet<Int>()
+
+    // 12. Sets from arrays
+    val someArray = arrayOf(1,2,3,1)
+    val someSet = mutableSetOf(*someArray)
+    println(someSet)
+
+    // 13. Accessing elements
+
+    println(someSet.contains(1))
+    println(4 in someSet)
+    for (number in someSet){
+        println(number)
+    }
+
+    // 14. Adding and removing elements
+    someSet.add(5)
+
+    val removedOne = someSet.remove(1)
+    println(removedOne)
+
+    println(someSet)
 }
