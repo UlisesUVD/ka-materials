@@ -133,7 +133,7 @@ fun main() {
   // 8. Delegated properties as conventions
   var name: String by NameDelegate()
 
-  developmentDepartment.hire()
+  // developmentDepartment.hire()
 }
 
 
