@@ -1,3 +1,5 @@
+import java.util.*
+
 /*
  * Copyright (c) 2021 Razeware LLC
  *
@@ -28,6 +30,44 @@
  * THE SOFTWARE.
  */
 
-class Robot(private val name: String) {
+class Robot(val name: String) {
 
+    var strength: Int = 0
+    private var health : Int = 100
+
+    private var random : Random = Random()
+
+    var isAlive : Boolean = true
+
+    init {
+        strength = random.randomStrength()
+        report("created (strength $strength")
+    }
+
+    fun report(message: String){
+        println("$name: \t$message")
+    }
+
+    private fun damage(damage: Int){
+
+        val blocked = Random().randomBlock()
+
+        if(blocked){
+            report("Blocked attack!")
+            return
+        }
+
+        health -= damage
+        report("Damage -$damage, Health $health")
+
+
+        if(health <= 0){
+            isAlive = false
+        }
+    }
+
+    infix fun attack(robot: Robot){
+        val damage = random.randomDamage(strength)
+        robot.damage(damage)
+    }
 }

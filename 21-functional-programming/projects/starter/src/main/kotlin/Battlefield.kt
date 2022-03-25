@@ -30,4 +30,33 @@
 
 object Battlefield {
 
+    inline fun beginBattle(firstRobot: Robot,
+                    secondRobot: Robot,
+                    noinline onBattleEnded: Robot.() -> Unit) {
+
+        var winner: Robot? = null
+
+        battle(firstRobot, secondRobot)
+
+        winner = if (firstRobot.isAlive) firstRobot else secondRobot
+
+        onBattleEnded(winner)
+    }
+
+    tailrec fun battle(firstRobot: Robot, secondRobot: Robot) {
+
+        firstRobot attack secondRobot
+
+        if (!secondRobot.isAlive) {
+            return
+        }
+
+        secondRobot attack firstRobot
+
+        if (!firstRobot.isAlive) {
+            return
+        }
+
+        battle(firstRobot, secondRobot)
+    }
 }

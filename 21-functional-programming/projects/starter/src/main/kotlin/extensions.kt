@@ -1,3 +1,5 @@
+import java.util.*
+
 /*
  * Copyright (c) 2021 Razeware LLC
  *
@@ -27,3 +29,15 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
+
+fun Random.randomStrength() : Int{
+    return Random().nextInt(90) + 10
+}
+
+fun Random.randomDamage(strength: Int): Int{
+    return (strength * 0.1 + Random().nextInt(10)).toInt()
+}
+
+fun Random.randomBlock() : Boolean{
+    return Random().nextBoolean()
+}
