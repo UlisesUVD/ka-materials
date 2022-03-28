@@ -1,3 +1,6 @@
+import kotlinx.coroutines.*
+import kotlin.math.floor
+
 /*
  * Copyright (c) 2021 Razeware LLC
  *
@@ -30,24 +33,72 @@
 
 object BuildingYard {
 
-  fun startProject(name: String, floors: Int) {
+  class Project(var name: String, var floors: Int)
+
+  suspend fun startProject(projects: List<Project>) : Collection<Deferred<Building>>{
     val startTime = System.currentTimeMillis()
-    val building = Building(name)
+    val buildings = ArrayList<Deferred<Building>>()
 
-    building.speakThroughBullhorn("$name is started")
-    building.makeFoundation()
+    for(project in projects){
 
-    (1 until floors).forEach {
-      building.buildFloor(it)
-      building.placeWindows(it)
-      building.installDoors(it)
-      building.provideElectricity(it)
-      building.fitOut(it)
+      buildings.add(
+        coroutineScope {
+          async {
+            val building = Building(project.name, project.floors, scope = this)
+            val cores = Runtime.getRuntime().availableProcessors()
+            building.speakThroughBullhorn("The building of ${building.name} is started with $cores building machines engaged")
+            building.makeFoundation().join()
+
+            (1 .. project.floors).forEach {
+              building.buildFloor(it).join()
+              building.placeWindows(it)
+              building.installDoors(it)
+              building.provideElectricity(it)
+              building.fitOut(it)
+            }
+
+            building.buildRoof().join()
+
+            building
+          }
+        }
+      )
+
     }
 
-    building.buildRoof()
+    buildings.awaitAll()
+    return buildings
+
+  }
+
+
+  suspend fun startProject(name: String, floors: Int) {
+    val startTime = System.currentTimeMillis()
+    val building = withContext(Dispatchers.Default){
+      val building = Building(name, scope = this)
+      val cores = Runtime.getRuntime().availableProcessors()
+      building.speakThroughBullhorn("The building of ${building.name} is started with $cores building machines engaged")
+      building.makeFoundation().join()
+
+      (1 .. floors).forEach {
+        building.buildFloor(it).join()
+        building.placeWindows(it)
+        building.installDoors(it)
+        building.provideElectricity(it)
+        building.fitOut(it)
+      }
+
+      building.buildRoof().join()
+
+      building
+    }
+
+    if(building.floors == floors){
+      building.speakThroughBullhorn("${building.name} is ready")
+    }
 
     building.speakThroughBullhorn("${building.name} is ready in ${System.currentTimeMillis() - startTime}!")
+
   }
 
 }

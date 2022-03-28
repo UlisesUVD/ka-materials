@@ -1,3 +1,7 @@
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
+
 /*
  * Copyright (c) 2021 Razeware LLC
  *
@@ -28,41 +32,45 @@
  * THE SOFTWARE.
  */
 
-class Building(val name: String) {
+class Building(
+  val name: String,
+  var floors: Int = 0,
+  private val scope: CoroutineScope) {
 
-  fun makeFoundation() {
-    Thread.sleep(300)
-    speakThroughBullhorn("The foundation is ready")
+  suspend fun makeFoundation() = scope.launch{
+    delay(300)
+    speakThroughBullhorn("The foundation of $name is ready")
   }
 
-  fun buildFloor(floor: Int) {
-    Thread.sleep(100)
-    speakThroughBullhorn("The $floor'th floor is raised")
+  suspend fun buildFloor(floor: Int) = scope.launch{
+    delay(100)
+    speakThroughBullhorn("The $floor'th floor of $name is raised")
+    ++floors
   }
 
-  fun placeWindows(floor: Int) {
-    Thread.sleep(100)
-    speakThroughBullhorn("Windows are placed on the $floor'th floor")
+  suspend fun placeWindows(floor: Int) = scope.launch{
+    delay(100)
+    speakThroughBullhorn("Windows are placed on the $floor'th floor of $name")
   }
 
-  fun installDoors(floor: Int) {
-    Thread.sleep(100)
-    speakThroughBullhorn("Doors are installed on the $floor'th floor")
+  suspend fun installDoors(floor: Int) = scope.launch{
+    delay(100)
+    speakThroughBullhorn("Doors are installed on the $floor'th floor of $name")
   }
 
-  fun provideElectricity(floor: Int) {
-    Thread.sleep(100)
-    speakThroughBullhorn("Electricity is provided on the $floor'th floor")
+  suspend fun provideElectricity(floor: Int) = scope.launch{
+    delay(100)
+    speakThroughBullhorn("Electricity is provided on the $floor'th floor of $name")
   }
 
-  fun buildRoof() {
-    Thread.sleep(200)
-    speakThroughBullhorn("The roof is ready")
+  suspend fun buildRoof() = scope.launch{
+    delay(200)
+    speakThroughBullhorn("The roof of $name is ready")
   }
 
-  fun fitOut(floor: Int) {
-    Thread.sleep(200)
-    speakThroughBullhorn("The $floor'th floor is furnished")
+  suspend fun fitOut(floor: Int) = scope.launch{
+    delay(200)
+    speakThroughBullhorn("The $floor'th floor of $name is furnished")
   }
 
   fun speakThroughBullhorn(message: String) = println(message)
